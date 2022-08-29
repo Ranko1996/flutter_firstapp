@@ -21,7 +21,7 @@ class MyHomePage extends StatelessWidget {
       amount: 69.99,
       date: DateTime.now(),
     ),
-     Transaction(
+    Transaction(
       id: 't2',
       title: 'Weekly Groceries',
       amount: 13.53,
@@ -43,9 +43,30 @@ class MyHomePage extends StatelessWidget {
                 child: Text('Chart!'),
               ),
             ),
-            const Card(
-              child: Text('LIst of tx'),
-            )
+            Column(
+              children: transactions.map((tx) {
+                return Card(
+                  child: Row(
+                    children: <Widget>[
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 15),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black, width: 2)),
+                        child: Text(tx.amount.toString()),
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Text(tx.title),
+                          Text(tx.date.toString())
+                        ],
+                      )
+                    ],
+                  ),
+                );
+              }).toList(),
+            ),
           ],
         ));
   }
